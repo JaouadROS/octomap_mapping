@@ -84,10 +84,12 @@ public:
 #ifdef COLOR_OCTOMAP_SERVER
   typedef pcl::PointXYZRGB PCLPoint;
   typedef pcl::PointCloud<pcl::PointXYZRGB> PCLPointCloud;
+  typedef pcl::PointCloud<pcl::PointXYZI> PCLPointCloudI;  
   typedef octomap::ColorOcTree OcTreeT;
 #else
   typedef pcl::PointXYZ PCLPoint;
   typedef pcl::PointCloud<pcl::PointXYZ> PCLPointCloud;
+  typedef pcl::PointCloud<pcl::PointXYZI> PCLPointCloudI;
   typedef octomap::OcTree OcTreeT;
 #endif
   typedef octomap_msgs::GetOctomap OctomapSrv;
@@ -140,6 +142,7 @@ protected:
   * @param nonground all other endpoints (clear up to occupied endpoint)
   */
   virtual void insertScan(const tf::Point& sensorOrigin, const PCLPointCloud& ground, const PCLPointCloud& nonground);
+  virtual void insertScan2(const tf::Point& sensorOrigin, const PCLPointCloud& ground, const PCLPointCloudI& nongroundi);
 
   /// label the input cloud "pc" into ground and nonground. Should be in the robot's fixed frame (not world!)
   void filterGroundPlane(const PCLPointCloud& pc, PCLPointCloud& ground, PCLPointCloud& nonground) const;
